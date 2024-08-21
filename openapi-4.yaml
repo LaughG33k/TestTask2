@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: TestTask2
+  version: 0.0.1
+paths:
+  /list:
+    get:
+      
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: 
+                type: object
+                required:
+                  - news
+                properties:
+                  news:
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/News'
+                      
+      
+        '500':
+          description: Iteranl server error
+          
+  
+  /edit/{id}:
+    post:
+      
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema: 
+            type: integer
+            
+        - in: header
+          required: true
+          name: authorization
+          schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQyNzExNjYsInBlcm1pc3Npb24iOiJhZG1pbiIsInNlcnZpY2VfdXVpZCI6InRlc3RUYXNrIiwidXVpZCI6ImE0MzMzYjMxLTU4NjUtNDlkZi1hYmUxLTkxOTlmMGRmN2JiZCJ9.be8dWImx1eR6nCe1aUubbsOEFNYixwK_o0bn1utFbaYenJ-2DN1-paY4hP6-l-fPXhr7pJvAL9rEVz65r2nqzQ
+          
+      requestBody:
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/News'
+                  
+      responses:
+        '200':
+          description: ok
+          
+     
+                      
+        '500':
+          description: iternal server error
+          
+          
+  /auth/register:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogPas'
+                
+          
+          
+      responses:
+        '200':
+          description: 'ok'
+          
+    
+  /auth/login:
+   post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogPas'
+                
+          
+          
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/JwtAndRt'
+          
+  
+          
+          
+  /auth/updatejwt:
+  
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+               
+              
+      
+      responses: 
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/JwtAndRt'
+          
+        '500':
+          description: Iternal server error
+          
+        
+            
+      
+components:
+  schemas: 
+  
+    
+    News: 
+      type: object
+      required:
+        - Id
+        - Title
+        - Content
+        - Categories
+      
+      properties:
+        Id:
+          type: integer
+      
+        Title:
+          type: string
+        
+        Contnet:
+          type: string
+          
+        Categories:
+          type: array
+          items:
+              type: string
+          
+          
+    LogPas:
+      type: object
+      
+      required:
+        - login
+        - password
+      properties:
+        login:
+          type: string
+        password: 
+          type: string
+          
+    JwtAndRt:
+      type: object
+      properties:
+        jwt: 
+          type: string
+        refresh_token:
+          type: string
+        
+
+      
+      
+        
+        
