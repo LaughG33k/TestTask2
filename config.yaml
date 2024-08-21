@@ -1,0 +1,24 @@
+host: "127.0.0.1"
+port: "8080"
+readTimeoutSec: 45
+writeTimeoutSec: 45
+
+userDbCfg:
+  host: "127.0.0.1"
+  port: 5432
+  user: "postgres"
+  password: "123456"
+  db: "nn"
+  maxPoolSize: 100
+
+newsDbCfg:
+  host: "127.0.0.1"
+  port: 5432
+  user: "postgres"
+  password: "123456"
+  db: "news"
+  maxPoolSize: 100
+
+
+
+
